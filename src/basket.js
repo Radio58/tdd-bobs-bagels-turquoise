@@ -11,21 +11,29 @@ class Basket {
   }
 
   addToBasket(sku) {
+    console.log(sku)
+    if (this.basketArray.length >= this.basketSize) {
+      return "WARNING - Basket is full" 
+    }
     menu.forEach((item) => {
-      if (item.sku === sku && this.basketArray.length < this.basketSize) {
-        this.basketArray.push(item);
+      if (item.sku === sku) {
+        console.log('pushed')
+        return this.basketArray.push(item);
       }
     })
-    return "WARNING - Basket is full";
   }
 
   removeItems(sku) {
-    this.basketArray.forEach((item) => {
-      if (item.sku === sku) {
-        this.basketArray.splice(i, 1);
-      }
+    const found = this.basketArray.find((item) => {
+      return item.sku === sku
     })
-    return "That item isn't in your basket";
+
+    if (found) {
+      this.basketArray.splice(this.basketArray.indexOf(found), 1)
+      return "Found"
+    } else {
+      return "That item isn't in your basket" 
+    }
   }
 
   // checkPrice(sku) takes a string, loops through the menu array and reports the price if the string matches on an item
@@ -41,9 +49,9 @@ class Basket {
   
   totalBasketPrice() {
     let totalPrice = 0;
-    for (let i = 0; i < this.priceArray.length; i++) {
-      totalPrice += this.priceArray[i];
-    }
+    this.priceArray.forEach((item) => {
+      totalPrice += item;
+    })
     totalPrice = totalPrice - this.discountedPrice();
     return Number(totalPrice.toFixed(2));
   }
