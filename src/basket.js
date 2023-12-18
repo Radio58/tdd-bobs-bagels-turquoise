@@ -28,6 +28,7 @@ class Basket {
     return "That item isn't in your basket";
   }
 
+  // checkPrice(sku) takes a string, loops through the menu array and reports the price if the string matches on an item
   checkPrice(sku) {
     for (let i = 0; i < menu.length; i++) {
       if (menu[i].sku === sku) {
@@ -37,6 +38,7 @@ class Basket {
     }
   }
 
+  
   totalBasketPrice() {
     let totalPrice = 0;
     for (let i = 0; i < this.priceArray.length; i++) {
@@ -51,6 +53,7 @@ class Basket {
       this.discountedArray.push(this.basketArray[i].sku);
     }
     this.count = this.discountedArray.reduce((tally, sku) => {
+        console.log(tally, sky)
       tally[sku] = (tally[sku] || 0) + 1;
       return tally;
     }, {});
