@@ -30,12 +30,12 @@ class Basket {
 
   // checkPrice(sku) takes a string, loops through the menu array and reports the price if the string matches on an item
   checkPrice(sku) {
-    for (let i = 0; i < menu.length; i++) {
-      if (menu[i].sku === sku) {
+    menu.forEach((item) => {
+      if (item.sku === sku) {
         // console.log("sku", menu[i])
-        this.priceArray.push(menu[i].price);
+        this.priceArray.push(item.price);
       }
-    }
+    })
   }
 
   
