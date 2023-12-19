@@ -49,22 +49,27 @@ class Basket {
   
   totalBasketPrice() {
     let totalPrice = 0;
-    this.priceArray.forEach((item) => {
-      totalPrice += item;
+    this.basketArray.forEach((item) => {
+      totalPrice += item.price
     })
-    totalPrice = totalPrice - this.discountedPrice();
-    return Number(totalPrice.toFixed(2));
+
+    // totalPrice = totalPrice - this.discountedPrice();
+    return totalPrice.toFixed(2)
   }
 
   discountedPrice() {
     for (let i = 0; i < this.basketArray.length; i++) {
       this.discountedArray.push(this.basketArray[i].sku);
     }
+
     this.count = this.discountedArray.reduce((tally, sku) => {
-        console.log(tally, sky)
+        console.log(tally, sku)
       tally[sku] = (tally[sku] || 0) + 1;
       return tally;
     }, {});
+
+    console.log('count', this.count)
+    
     let totalDiscount = 0;
     const skus = Object.keys(this.count);
     for (let i = 0; i < skus.length; i++) {
@@ -76,6 +81,8 @@ class Basket {
         }
       }
     }
+
+    console.log(totalDiscount)
 
     return totalDiscount;
   }
